@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login db_rekam_medis - Profil Dokter</title>
+    <style>
+        /* Desain Utama - WARNA HITAM */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #121212;
+            color: #ffffff;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            box-sizing: border-box;
+        }
+
+        /* Container Kotak Login */
+        .login-container {
+            background-color: #1e1e1e;
+            border: 2px solid #ff69b4; /* Pink Border */
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 8px 24px rgba(255, 105, 180, 0.2);
+            width: 100%;
+            max-width: 400px;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .avatar-dokter {
+            width: 80px;
+            height: 80px;
+            background-color: #ff69b4;
+            border-radius: 50%;
+            margin: 0 auto 15px auto;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 40px;
+            color: #121212;
+        }
+
+        .login-container h2 {
+            margin: 0 0 5px 0;
+            color: #ffffff;
+            font-size: 22px;
+        }
+
+        .db-title {
+            font-size: 14px;
+            color: #aaaaaa;
+            margin-bottom: 25px;
+            letter-spacing: 1px;
+        }
+
+        /* Form Group - WARNA PINK UNTUK TEKS & ISIAN */
+        .form-group {
+            text-align: left;
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-size: 14px;
+            color: #ff69b4; /* Label Pink */
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #ff69b4; /* Border Pink */
+            border-radius: 8px;
+            background-color: #121212;
+            color: #ff69b4; /* Isian Ketikan Pink */
+            font-size: 16px;
+            box-sizing: border-box;
+            outline: none;
+        }
+
+        .form-group input::placeholder {
+            color: rgba(255, 105, 180, 0.4);
+        }
+
+        /* Tombol MASUK Pink */
+        .btn-masuk {
+            width: 100%;
+            padding: 12px;
+            background-color: #ff69b4;
+            border: none;
+            border-radius: 8px;
+            color: #121212;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .btn-masuk:hover {
+            background-color: #ff409f;
+        }
+
+        /* === PANEL MANAJEMEN AKUN (UNTUK TAMBAH, EDIT, HAPUS) === */
+        .crud-container {
+            background-color: #1e1e1e;
+            border: 1px dashed #ff69b4;
+            padding: 20px;
+            border-radius: 10px;
+            width: 100%;
+            max-width: 450px;
+            box-sizing: border-box;
+        }
+
+        .crud-container h3 {
+            margin-top: 0;
+            color: #ff69b4;
+            text-align: center;
+            font-size: 16px;
+        }
+
+        .crud-form {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+
+        .crud-form input {
+            flex: 1;
+            padding: 8px;
+            background: #121212;
+            border: 1px solid #ff69b4;
+            border-radius: 5px;
+            color: #ff69b4;
+            font-size: 13px;
+        }
+
+        .btn-action {
+            padding: 8px 15px;
+            background-color: #ff69b4;
+            color: #121212;
+            border: none;
+            border-radius: 5px;
+            font-weight: bold;
+            cursor: pointer;
+            font-size: 13px;
+        }
+
+        /* Tabel Data Akun */
+        .account-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+            font-size: 13px;
+        }
+
+        .account-table th, .account-table td {
+            border: 1px solid #333;
+            padding: 8px;
+            text-align: left;
+        }
+
+        .account-table th {
+            background-color: #2a2a2a;
+            color: #ff69b4;
+        }
+
+        .btn-edit {
+            background-color: #ffc107;
+            color: black;
+            border: none;
+            padding: 3px 8px;
+            border-radius: 3px;
+            cursor: pointer;
+            margin-right: 5px;
+        }
+
+        .btn-delete {
+            background-color: #dc3545;
+            color: white;
+            border: none;
+            padding: 3px 8px;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- 1. KOTAK UTAMA LOGIN -->
+    <div class="login-container">
+        <div class="avatar-dokter">🩺</div>
+        <h2>PROFIL DOKTER</h2>
+        <div class="db-title">db_rekam_medis</div>
+
+        <form id="loginForm">
+            <div class="form-group">
+                <label for="username">ID Dokter / Username</label>
+                <input type="text" id="username" placeholder="Masukkan ID Dokter Anda..." required>
+            </div>
+
+            <div class="form-group">
+                <label for="password">Kata Sandi</label>
+                <input type="password" id="password" placeholder="Masukkan Kata Sandi..." required>
+            </div>
+
+            <button type="submit" class="btn-masuk">Masuk</button>
+        </form>
+    </div>
+
+    <!-- 2. PANEL MENGELOLA AKUN (TAMBAH, EDIT, HAPUS) -->
+    <div class="crud-container">
+        <h3>⚙️ KELOLA AKUN LOGIN DOKTER</h3>
+        
+        <!-- Form Tambah / Edit -->
+        <div class="crud-form">
+            <input type="hidden" id="editIndex"> 
+            <input type="text" id="newUsername" placeholder="User Baru...">
+            <input type="text" id="newPassword" placeholder="PW Baru...">
+            <button id="btnSave" class="btn-action" onclick="simpanAkun()">TAMBAH</button>
+        </div>
+
+        <!-- Daftar Akun Terdaftar -->
+        <table class="account-table">
+            <thead>
+                <tr>
+                    <th>Username</th>
+                    <th>Password</th>
+                    <th>Aksi</th>
+                </tr>
+            </thead>
+            <tbody id="accountList">
+                <!-- Data otomatis terisi via JavaScript -->
+            </tbody>
+        </table>
+    </div>
+
+    <script>
+        // Data akun bawaan utama agar pasti muncul
+        const akunDefault = [
+            { user: "dokter_andi", pw: "12345" },
+            { user: "dokter_siti", pw: "pwsiti" }
+        ];
+
+        // Jika penyimpanan kosong, paksa isi pakai akunDefault
+        if (!localStorage.getItem("akunDokter") || JSON.parse(localStorage.getItem("akunDokter")).length === 0) {
+            localStorage.setItem("akunDokter", JSON.stringify(akunDefault));
+        }
+
+        let daftarAkun = JSON.parse(localStorage.getItem("akunDokter"));
+
+        // Fungsi menampilkan data ke tabel
+        function tampilkanAkun() {
+            localStorage.setItem("akunDokter", JSON.stringify(daftarAkun));
+            const tbody = document.getElementById("accountList");
+            tbody.innerHTML = "";
+
+            daftarAkun.forEach((akun, index) => {
+                tbody.innerHTML += `
+                    <tr>
+                        <td style="color: #ff69b4;">${akun.user}</td>
+                        <td style="color: #ff69b4;">${akun.pw}</td>
+                        <td>
+                            <button class="btn-edit" onclick="editAkun(${index})">Edit</button>
+                            <button class="btn-delete" onclick="hapusAkun(${index})">Hapus</button>
+                        </td>
+                    </tr>
+                `;
+            });
+        }
+
+        // TAMBAH ATAU UPDATE AKUN
+        function simpanAkun() {
+            const userIn = document.getElementById("newUsername").value.trim();
+            const pwIn = document.getElementById("newPassword").value.trim();
+            const editIndex = document.getElementById("editIndex").value;
+
+            if (userIn === "" || pwIn === "") {
+                alert("Username dan Password tidak boleh kosong!");
+                return;
+            }
+
+            if (editIndex === "") {
+                daftarAkun.push({ user: userIn, pw: pwIn });
+            } else {
+                daftarAkun[editIndex] = { user: userIn, pw: pwIn };
+                document.getElementById("editIndex").value = "";
+                document.getElementById("btnSave").innerText = "TAMBAH";
+            }
+
+            document.getElementById("newUsername").value = "";
+            document.getElementById("newPassword").value = "";
+            
+            tampilkanAkun();
+        }
+
+        // ISI FORM SAAT KLIK EDIT
+        function editAkun(index) {
+            document.getElementById("newUsername").value = daftarAkun[index].user;
+            document.getElementById("newPassword").value = daftarAkun[index].pw;
+            document.getElementById("editIndex").value = index;
+            document.getElementById("btnSave").innerText = "SIMPAN";
+        }
+
+        // HAPUS AKUN
+        function hapusAkun(index) {
+            if (confirm(`Hapus akun ${daftarAkun[index].user}?`)) {
+                daftarAkun.splice(index, 1);
+                tampilkanAkun();
+            }
+        }
+
+        // PROSES CEK LOGIN
+        document.getElementById("loginForm").addEventListener("submit", function(e) {
+            e.preventDefault();
+            const userLogin = document.getElementById("username").value;
+            const pwLogin = document.getElementById("password").value;
+
+            const cocok = daftarAkun.find(akun => akun.user === userLogin && akun.pw === pwLogin);
+
+            if (cocok) {
+                alert("🎉 LOGIN BERHASIL! Selamat datang Dokter " + cocok.user);
+            } else {
+                alert("❌ LOGIN GAGAL! Username atau Password salah.");
+            }
+        });
+
+        // Jalankan tampilan
+        tampilkanAkun();
+    </script>
+
+</body>
+</html>
